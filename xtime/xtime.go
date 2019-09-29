@@ -5,15 +5,15 @@
 // You can obtain one at https://github.com/gogf/gf.
 
 // Package gtime provides functionality for measuring and displaying time.
-package time
+package xtime
 
 import (
 	"errors"
+	"github.com/go-xe2/xtype/regex"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
-	"github.com/go-xe2/xtype/regex"
 )
 
 const (

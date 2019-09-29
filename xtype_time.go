@@ -6,11 +6,14 @@
 
 package xtype
 
-import "time"
+import (
+	"github.com/go-xe2/xtype/xtime"
+	"time"
+)
 
 // Time converts <i> to time.Time.
 func Time(i interface{}, format ...string) time.Time {
-	if t := GTime(i, format...); t != nil {
+	if t := XTime(i, format...); t != nil {
 		return t.Time
 	}
 	return time.Time{}
@@ -21,7 +24,7 @@ func Time(i interface{}, format ...string) time.Time {
 // If <i> is numeric, then it converts <i> as nanoseconds.
 func Duration(i interface{}) time.Duration {
 	s := String(i)
-	if !strutils.IsNumeric(s) {
+	if !IsNumeric(s) {
 		d, _ := time.ParseDuration(s)
 		return d
 	}
@@ -32,20 +35,20 @@ func Duration(i interface{}) time.Duration {
 // The parameter <format> can be used to specify the format of <i>.
 // If no <format> given, it converts <i> using gtime.NewFromTimeStamp if <i> is numeric,
 // or using gtime.StrToTime if <i> is string.
-func GTime(i interface{}, format ...string) *gtime.Time {
+func XTime(i interface{}, format ...string) *xtime.Time {
 	s := String(i)
 	if len(s) == 0 {
-		return gtime.New()
+		return xtime.New()
 	}
 	// Priority conversion using given format.
 	if len(format) > 0 {
-		t, _ := gtime.StrToTimeFormat(s, format[0])
+		t, _ := xtime.StrToTimeFormat(s, format[0])
 		return t
 	}
-	if strutils.IsNumeric(s) {
-		return gtime.NewFromTimeStamp(Int64(s))
+	if IsNumeric(s) {
+		return xtime.NewFromTimeStamp(Int64(s))
 	} else {
-		t, _ := gtime.StrToTime(s)
+		t, _ := xtime.StrToTime(s)
 		return t
 	}
 }

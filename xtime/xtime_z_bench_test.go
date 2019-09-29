@@ -4,70 +4,69 @@
 // If a copy of the MIT was not distributed with this file,
 // You can obtain one at https://github.com/gogf/gf.
 
-package time_test
+package xtime_test
 
 import (
 	"testing"
-
-	"github.com/gogf/gf/g/os/gtime"
+	"github.com/go-xe2/xtype/xtime"
 )
 
 func Benchmark_Second(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		gtime.Second()
+		xtime.Second()
 	}
 }
 
 func Benchmark_Millisecond(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		gtime.Millisecond()
+		xtime.Millisecond()
 	}
 }
 
 func Benchmark_Microsecond(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		gtime.Microsecond()
+		xtime.Microsecond()
 	}
 }
 
 func Benchmark_Nanosecond(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		gtime.Nanosecond()
+		xtime.Nanosecond()
 	}
 }
 
 func Benchmark_StrToTime(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		gtime.StrToTime("2018-02-09T20:46:17.897Z")
+		xtime.StrToTime("2018-02-09T20:46:17.897Z")
 	}
 }
 
 func Benchmark_ParseTimeFromContent(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		gtime.ParseTimeFromContent("2018-02-09T20:46:17.897Z")
+		xtime.ParseTimeFromContent("2018-02-09T20:46:17.897Z")
 	}
 }
 
 func Benchmark_NewFromTimeStamp(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		gtime.NewFromTimeStamp(1542674930)
+		xtime.NewFromTimeStamp(1542674930)
 	}
 }
 
 func Benchmark_Date(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		gtime.Date()
+		xtime.Date()
 	}
 }
 
 func Benchmark_Datetime(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		gtime.Datetime()
+		xtime.Datetime()
 	}
 }
 
 func Benchmark_SetTimeZone(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		gtime.SetTimeZone("Asia/Shanghai")
+		xtime.SetTimeZone("Asia/Shanghai")
 	}
 }

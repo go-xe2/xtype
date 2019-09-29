@@ -24,50 +24,50 @@ func (t XType) Interface() interface{} {
 }
 
 func (t XType) String() string {
-	return ParseString(t.val)
+	return String(t.val)
 }
 
 func (t XType) Float64() float64 {
-	return ParseFloat64(t.val)
+	return Float64(t.val)
 }
 func (t XType) Float32() float32 {
-	return ParseFloat32(t.val)
+	return Float32(t.val)
 }
 
 func (t XType) Int64() int64 {
-	return ParseInt64(t.val)
+	return Int64(t.val)
 }
 func (t XType) Int() int {
-	return ParseInt(t.val)
+	return Int(t.val)
 }
 func (t XType) Int32() int32 {
-	return int32(ParseInt64(t.val))
+	return Int32(t.val)
 }
 func (t XType) Int16() int16 {
-	return int16(ParseInt64(t.val))
+	return Int16(t.val)
 }
 func (t XType) Int8() int8 {
-	return int8(ParseInt64(t.val))
+	return Int8(t.val)
 }
 
 func (t XType) Uint64() uint64 {
-	return ParseUint64(t.val)
+	return Uint64(t.val)
 }
 func (t XType) Uint() uint {
-	return ParseUint(t.val)
+	return Uint(t.val)
 }
 func (t XType) Uint32() uint32 {
-	return uint32(ParseUint(t.val))
+	return Uint32(t.val)
 }
 func (t XType) Uint16() uint16 {
-	return uint16(ParseUint(t.val))
+	return Uint16(t.val)
 }
 func (t XType) Uint8() uint8 {
-	return uint8(ParseUint(t.val))
+	return Uint8(t.val)
 }
 
 func (t XType) Bool() bool {
-	return ParseBool(t.val)
+	return Bool(t.val)
 }
 
 func (t XType) Slice() Slice {

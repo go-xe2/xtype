@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"reflect"
 	"strconv"
-	"time"
 )
 
 var (
@@ -63,17 +62,17 @@ func Convert(i interface{}, t string, params ...interface{}) interface{} {
 		}
 		return Time(i)
 
-	case "gtime.Time":
+	case "xtime.Time":
 		if len(params) > 0 {
-			return GTime(i, String(params[0]))
+			return XTime(i, String(params[0]))
 		}
-		return *GTime(i)
+		return *XTime(i)
 
-	case "GTime", "*gtime.Time":
+	case "XTime", "*xtime.Time":
 		if len(params) > 0 {
-			return GTime(i, String(params[0]))
+			return XTime(i, String(params[0]))
 		}
-		return GTime(i)
+		return XTime(i)
 
 	case "Duration", "time.Duration":
 		return Duration(i)
@@ -82,9 +81,13 @@ func Convert(i interface{}, t string, params ...interface{}) interface{} {
 	}
 }
 
-func String(v interface{}) string {
+func String(v interface{}, def ...string) string {
+	var defValue string = ""
+	if len(def) > 0 {
+		defValue = def[0]
+	}
 	if v == nil {
-		return ""
+		return defValue
 	}
 	switch value := v.(type) {
 	case int:
@@ -135,52 +138,72 @@ func String(v interface{}) string {
 }
 
 // Int converts <i> to int.
-func Int(i interface{}) int {
+func Int(i interface{}, def ...int) int {
+	var defValue = 0
+	if len(def) > 0 {
+		defValue = def[0]
+	}
 	if i == nil {
-		return 0
+		return defValue
 	}
 	if v, ok := i.(int); ok {
 		return v
 	}
-	return int(Int64(i))
+	return int(Int64(i, Int64(defValue)))
 }
 
 // Int8 converts <i> to int8.
-func Int8(i interface{}) int8 {
+func Int8(i interface{}, def ...int8) int8 {
+	var defV int8 = 0
+	if len(def) > 0 {
+		defV = def[0]
+	}
 	if i == nil {
-		return 0
+		return defV
 	}
 	if v, ok := i.(int8); ok {
 		return v
 	}
-	return int8(Int64(i))
+	return int8(Int64(i, Int64(defV)))
 }
 
 // Int16 converts <i> to int16.
-func Int16(i interface{}) int16 {
+func Int16(i interface{}, def ...int16) int16 {
+	var defV int16 = 0
+	if len(def) > 0 {
+		defV = def[0]
+	}
 	if i == nil {
-		return 0
+		return defV
 	}
 	if v, ok := i.(int16); ok {
 		return v
 	}
-	return int16(Int64(i))
+	return int16(Int64(i, Int64(defV)))
 }
 
 // Int32 converts <i> to int32.
-func Int32(i interface{}) int32 {
+func Int32(i interface{}, def ...int32) int32 {
+	var defV int32 = 0
+	if len(def) > 0 {
+		defV = def[0]
+	}
 	if i == nil {
-		return 0
+		return defV
 	}
 	if v, ok := i.(int32); ok {
 		return v
 	}
-	return int32(Int64(i))
+	return int32(Int64(i, Int64(defV)))
 }
 
-func Int64(v interface{}) int64 {
+func Int64(v interface{}, def ...int64) int64 {
+	var defVaue int64 = 0
+	if len(def) > 0 {
+		defVaue = def[0]
+	}
 	if v == nil {
-		return 0
+		return defVaue
 	}
 	switch value := v.(type) {
 	case int:
@@ -238,53 +261,73 @@ func Int64(v interface{}) int64 {
 }
 
 // Uint converts <i> to uint.
-func Uint(i interface{}) uint {
+func Uint(i interface{}, def ...uint) uint {
+	var defV uint = 0
+	if len(def) > 0 {
+		defV = def[0]
+	}
 	if i == nil {
-		return 0
+		return defV
 	}
 	if v, ok := i.(uint); ok {
 		return v
 	}
-	return uint(Uint64(i))
+	return uint(Uint64(i, Uint64(defV)))
 }
 
 // Uint8 converts <i> to uint8.
-func Uint8(i interface{}) uint8 {
+func Uint8(i interface{}, def ...uint8) uint8 {
+	var defV uint8 = 0
+	if len(def) > 0 {
+		defV = def[0]
+	}
 	if i == nil {
-		return 0
+		return defV
 	}
 	if v, ok := i.(uint8); ok {
 		return v
 	}
-	return uint8(Uint64(i))
+	return uint8(Uint64(i, Uint64(defV)))
 }
 
 // Uint16 converts <i> to uint16.
-func Uint16(i interface{}) uint16 {
+func Uint16(i interface{}, def ...uint16) uint16 {
+	var defV uint16 = 0
+	if len(def) > 0 {
+		defV = def[0]
+	}
 	if i == nil {
-		return 0
+		return defV
 	}
 	if v, ok := i.(uint16); ok {
 		return v
 	}
-	return uint16(Uint64(i))
+	return uint16(Uint64(i, uint64(defV)))
 }
 
 // Uint32 converts <i> to uint32.
-func Uint32(i interface{}) uint32 {
+func Uint32(i interface{}, def ...uint32) uint32 {
+	var defV uint32 = 0
+	if len(def) > 0 {
+		defV = def[0]
+	}
 	if i == nil {
-		return 0
+		return defV
 	}
 	if v, ok := i.(uint32); ok {
 		return v
 	}
-	return uint32(Uint64(i))
+	return uint32(Uint64(i,uint64(defV)))
 }
 
 // Uint64 converts <i> to uint64.
-func Uint64(i interface{}) uint64 {
+func Uint64(i interface{}, def ...uint64) uint64 {
+	var defV uint64 = 0
+	if len(def) > 0 {
+		defV = def[0]
+	}
 	if i == nil {
-		return 0
+		return defV
 	}
 	switch value := i.(type) {
 	case int:
@@ -341,14 +384,18 @@ func Uint64(i interface{}) uint64 {
 	}
 }
 
-func Float(i interface{}) float32  {
-	return Float32(i)
+func Float(i interface{}, def ...float32) float32  {
+	return Float32(i, def...)
 }
 
 // Float32 converts <i> to float32.
-func Float32(i interface{}) float32 {
+func Float32(i interface{}, def ...float32) float32 {
+	var defV float32 = 0
+	if len(def) > 0 {
+		defV = def[0]
+	}
 	if i == nil {
-		return 0
+		return defV
 	}
 	switch value := i.(type) {
 	case float32:
@@ -364,9 +411,13 @@ func Float32(i interface{}) float32 {
 }
 
 // Float64 converts <i> to float64.
-func Float64(i interface{}) float64 {
+func Float64(i interface{}, def ...float64) float64 {
+	var defValue float64 = 0
+	if len(def) > 0 {
+		defValue = def[0]
+	}
 	if i == nil {
-		return 0
+		return defValue
 	}
 	switch value := i.(type) {
 	case float32:
